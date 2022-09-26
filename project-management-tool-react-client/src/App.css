@@ -9,6 +9,11 @@ img {
   color: #18a2b9;
 }
 
+
+.fa.fa-flag-checkered {
+  color: #419aff;
+}
+
 .list-group-item.delete:hover {
   cursor: -webkit-grab;
   background-color: pink;
