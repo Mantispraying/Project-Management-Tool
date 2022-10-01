@@ -28,10 +28,14 @@ public class ProjectTaskService {
             projectTask.setPriority(3);
         }
 
-        if(projectTask.getStatus().equals("")||projectTask.getStatus()==null){
+        if(projectTask.getStatus()==""||projectTask.getStatus()==null){
             projectTask.setStatus("TO_DO");
         }
 
         return projectTaskRepository.save(projectTask);
+    }
+
+    public Iterable<ProjectTask> findBacklogById(String backlog_id) {
+        return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
 }
