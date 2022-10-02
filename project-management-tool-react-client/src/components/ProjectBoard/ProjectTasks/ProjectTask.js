@@ -13,7 +13,7 @@ class ProjectTask extends Component {
     } else if (project_task.priority === 2) {
       priorityClass = "bg-warning text-light";
       priorityString = "MEDIUM";
-    }else if (project_task.priority === 3) {
+    } else if (project_task.priority === 3) {
       priorityClass = "bg-info text-light";
       priorityString = "LOW";
     }
@@ -28,7 +28,10 @@ class ProjectTask extends Component {
           <p className="card-text text-truncate ">
             {project_task.acceptanceCriteria}
           </p>
-          <Link to="" className="btn btn-primary">
+          <Link
+            to={`/updateProjectTask/${project_task.projectIdentifier}/${project_task.projectSequence}`}
+            className="btn btn-primary"
+          >
             View / Update
           </Link>
 
