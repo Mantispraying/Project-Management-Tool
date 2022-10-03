@@ -3,6 +3,7 @@ package com.Mantispraying.ProjectManagementTool.web;
 import com.Mantispraying.ProjectManagementTool.domain.User;
 import com.Mantispraying.ProjectManagementTool.services.MapValidationErrorService;
 import com.Mantispraying.ProjectManagementTool.services.UserService;
+import com.Mantispraying.ProjectManagementTool.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserValidator userValidator;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
+        userValidator.validate(user,result);
 
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null)return errorMap;
