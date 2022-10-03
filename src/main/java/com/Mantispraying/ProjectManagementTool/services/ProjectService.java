@@ -2,9 +2,11 @@ package com.Mantispraying.ProjectManagementTool.services;
 
 import com.Mantispraying.ProjectManagementTool.domain.Backlog;
 import com.Mantispraying.ProjectManagementTool.domain.Project;
+import com.Mantispraying.ProjectManagementTool.domain.User;
 import com.Mantispraying.ProjectManagementTool.exceptions.ProjectIdException;
 import com.Mantispraying.ProjectManagementTool.repositories.BacklogRepository;
 import com.Mantispraying.ProjectManagementTool.repositories.ProjectRepository;
+import com.Mantispraying.ProjectManagementTool.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ public class ProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private BacklogRepository backlogRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Project saveOrUpdateProject(Project project){
+    public Project saveOrUpdateProject(Project project, String username){
         try{
+            User user = userRepository.findByUsername(username);
+            project.setUser(user);
+            project.setProjectLeader(user.getUsername());
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
 
             if(project.getId()==null){
